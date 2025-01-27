@@ -79,25 +79,25 @@ export const Hero = () => {
             </Button>
           </div>
 
-          <div className="mt-12 max-w-4xl mx-auto">
+          <div className="mt-12 w-full max-w-6xl mx-auto">
             <Carousel className="w-full">
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
                     <div className="p-1">
-                      <div className="overflow-hidden rounded-xl">
+                      <div className="overflow-hidden rounded-xl aspect-[16/9]">
                         <img
                           src={image.src}
                           alt={image.alt}
-                          className="w-full h-[400px] object-cover"
+                          className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="left-4" />
+              <CarouselNext className="right-4" />
             </Carousel>
           </div>
         </motion.div>
