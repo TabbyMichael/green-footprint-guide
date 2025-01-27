@@ -1,10 +1,40 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Leaf } from "lucide-react";
 import { Button } from "./ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
 
 export const Hero = () => {
+  const images = [
+    {
+      src: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9",
+      alt: "Pine trees in forest",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86",
+      alt: "Low angle view of trees",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1518495973542-4542c06a5843",
+      alt: "Sunlight through trees",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1472396961693-142e6e269027",
+      alt: "Deer in nature",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1438565434616-3ef039228b15",
+      alt: "Mountain goats",
+    },
+  ];
+
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-primary-100 to-white">
+    <section className="relative pt-20 min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-primary-100 to-white">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       </div>
@@ -47,6 +77,28 @@ export const Hero = () => {
             >
               Learn More
             </Button>
+          </div>
+
+          <div className="mt-12 max-w-4xl mx-auto">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {images.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div className="p-1">
+                      <div className="overflow-hidden rounded-xl">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-[400px] object-cover"
+                        />
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </motion.div>
       </div>
