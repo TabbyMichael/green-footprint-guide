@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:clean",
+    "build": "npm install && npm run build:clean",
     "build:clean": "tsc && vite build",
     "build:dev": "tsc && vite build --mode development",
     "lint": "eslint .",
