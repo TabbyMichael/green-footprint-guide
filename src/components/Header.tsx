@@ -1,8 +1,13 @@
 import { Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import { useState } from "react";
+import { Dialog, DialogContent } from "./ui/dialog";
+import { AuthForms } from "./auth/AuthForms";
 
 export const Header = () => {
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
@@ -28,15 +33,21 @@ export const Header = () => {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Button variant="outline" className="hidden md:inline-flex">
+            <Button variant="outline" className="hidden md:inline-flex" onClick={() => setShowAuthDialog(true)}>
               Sign In
             </Button>
-            <Button>
+            <Button onClick={() => setShowAuthDialog(true)}>
               Get Started
             </Button>
           </div>
         </div>
       </div>
+
+      <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+        <DialogContent className="sm:max-w-md">
+          <AuthForms />
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };
