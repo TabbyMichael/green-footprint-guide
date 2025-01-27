@@ -1,4 +1,5 @@
 import { Leaf, Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
 export const Footer = () => {
@@ -8,10 +9,10 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <Leaf className="h-6 w-6" />
               <span className="text-xl font-bold">EcoTrack</span>
-            </div>
+            </Link>
             <p className="text-primary-100">
               Empowering individuals and businesses to measure, reduce, and offset
               their carbon footprint for a sustainable future.
@@ -37,19 +38,19 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-4">
               <li>
-                <a href="/about-us" className="text-primary-100 hover:text-white transition-colors">
+                <Link to="/about-us" className="text-primary-100 hover:text-white transition-colors">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/features" className="text-primary-100 hover:text-white transition-colors">
+                <Link to="/features" className="text-primary-100 hover:text-white transition-colors">
                   Features
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="text-primary-100 hover:text-white transition-colors">
+                <Link to="/contact" className="text-primary-100 hover:text-white transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -59,19 +60,19 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Resources</h3>
             <ul className="space-y-4">
               <li>
-                <a href="/blog" className="text-primary-100 hover:text-white transition-colors">
+                <Link to="/blog" className="text-primary-100 hover:text-white transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/carbon-calculator" className="text-primary-100 hover:text-white transition-colors">
+                <Link to="/carbon-calculator" className="text-primary-100 hover:text-white transition-colors">
                   Carbon Calculator
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/offset-programs" className="text-primary-100 hover:text-white transition-colors">
+                <Link to="/offset-programs" className="text-primary-100 hover:text-white transition-colors">
                   Offset Programs
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -102,15 +103,15 @@ export const Footer = () => {
               © {new Date().getFullYear()} EcoTrack. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-primary-100 hover:text-white text-sm">
+              <Link to="/privacy" className="text-primary-100 hover:text-white text-sm">
                 Privacy Policy
-              </a>
-              <a href="/terms" className="text-primary-100 hover:text-white text-sm">
+              </Link>
+              <Link to="/terms" className="text-primary-100 hover:text-white text-sm">
                 Terms of Service
-              </a>
-              <a href="/cookies" className="text-primary-100 hover:text-white text-sm">
+              </Link>
+              <Link to="/cookies" className="text-primary-100 hover:text-white text-sm">
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>
