@@ -1,48 +1,62 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Calendar, User, Tag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Calendar, User, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BlogPost } from "@/components/BlogPost";
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      title: "10 Simple Ways to Reduce Your Carbon Footprint",
-      excerpt:
-        "Discover practical tips for reducing your environmental impact in your daily life.",
-      author: "Emma Green",
-      date: "2024-03-15",
-      category: "Eco-Friendly Living",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09",
-    },
-    {
-      title: "Understanding Carbon Offset Programs",
-      excerpt:
-        "Learn how carbon offset programs work and their impact on climate change.",
-      author: "David Chen",
-      date: "2024-03-12",
-      category: "Carbon Offsetting",
-      image: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8",
-    },
-    {
-      title: "The Future of Renewable Energy",
-      excerpt:
-        "Explore the latest innovations in renewable energy technology and their potential.",
-      author: "Sarah Johnson",
-      date: "2024-03-10",
-      category: "Renewable Energy",
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    },
-    {
-      title: "Sustainable Living: A Beginner's Guide",
-      excerpt:
-        "Start your journey to a more sustainable lifestyle with these essential tips.",
-      author: "Michael Brown",
-      date: "2024-03-08",
-      category: "Sustainability",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09",
-    },
-  ];
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 12;
+
+  const blogPosts = Array.from({ length: 100 }, (_, index) => ({
+    id: index + 1,
+    title: `${["10 Simple Ways to Reduce Your Carbon Footprint", "Understanding Carbon Offset Programs", "The Future of Renewable Energy", "Sustainable Living: A Beginner's Guide", "Climate Change Impact on Ecosystems", "Zero Waste Living Tips", "Green Technology Innovations", "Sustainable Transportation Solutions"][index % 8]} ${Math.floor(index / 8) + 1}`,
+    excerpt: [
+      "Discover practical tips for reducing your environmental impact in your daily life.",
+      "Learn how carbon offset programs work and their impact on climate change.",
+      "Explore the latest innovations in renewable energy technology and their potential.",
+      "Start your journey to a more sustainable lifestyle with these essential tips.",
+      "Understanding the effects of climate change on global ecosystems.",
+      "Practical tips for reducing waste in your daily life.",
+      "Exploring cutting-edge sustainable technologies.",
+      "Eco-friendly transportation alternatives for a greener future."
+    ][index % 8],
+    author: [
+      "Emma Green",
+      "David Chen",
+      "Sarah Johnson",
+      "Michael Brown",
+      "Lisa Taylor",
+      "James Wilson",
+      "Maria Rodriguez",
+      "Alex Thompson"
+    ][index % 8],
+    date: new Date(2024, 0, 1 + index).toISOString().split('T')[0],
+    category: [
+      "Eco-Friendly Living",
+      "Carbon Offsetting",
+      "Renewable Energy",
+      "Sustainability",
+      "Climate Action",
+      "Zero Waste",
+      "Green Technology",
+      "Sustainable Transport"
+    ][index % 8],
+    image: [
+      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09",
+      "https://images.unsplash.com/photo-1473448912268-2022ce9509d8",
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09",
+      "https://images.unsplash.com/photo-1498925008800-019c7d59d903",
+      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+      "https://images.unsplash.com/photo-1530878902700-5ad4f9e4c318"
+    ][index % 8]
+  }));
 
   const categories = [
     "All",
@@ -51,7 +65,25 @@ const Blog = () => {
     "Renewable Energy",
     "Sustainability",
     "Climate Action",
+    "Zero Waste",
+    "Green Technology",
+    "Sustainable Transport"
   ];
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const handlePostClick = (postId: number) => {
+    navigate(`/blog/${postId}`);
+  };
 
   return (
     <div className="min-h-screen">
@@ -91,6 +123,42 @@ const Blog = () => {
                 </Button>
               ))}
             </div>
+
+            {/* Pagination */}
+            <div className="mt-12 flex justify-center items-center space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(num => {
+                  if (totalPages <= 7) return true;
+                  if (num === 1 || num === totalPages) return true;
+                  if (num >= currentPage - 2 && num <= currentPage + 2) return true;
+                  return false;
+                })
+                .map((number) => (
+                  <Button
+                    key={number}
+                    variant={currentPage === number ? "default" : "outline"}
+                    onClick={() => paginate(number)}
+                  >
+                    {number}
+                  </Button>
+                ))}
+
+              <Button
+                variant="outline"
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         </section>
 
@@ -98,13 +166,14 @@ const Blog = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post, index) => (
+              {currentPosts.map((post) => (
                 <motion.article
-                  key={post.title}
+                  key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                  transition={{ duration: 0.5 }}
+                  className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer"
+                  onClick={() => handlePostClick(post.id)}
                 >
                   <img
                     src={post.image}
@@ -112,30 +181,63 @@ const Blog = () => {
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
-                    <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {post.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <User className="w-4 h-4" />
-                        {post.author}
-                      </span>
-                    </div>
-                    <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                    <h3 className="text-xl font-semibold mb-2 hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
                     <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="flex items-center text-sm text-primary-600">
+                    <div className="flex items-center text-sm text-gray-500 space-x-4">
+                      <div className="flex items-center">
+                        <User className="w-4 h-4 mr-1" />
+                        {post.author}
+                      </div>
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {post.date}
+                      </div>
+                      <div className="flex items-center">
                         <Tag className="w-4 h-4 mr-1" />
                         {post.category}
-                      </span>
-                      <Button variant="link" className="text-primary-600">
-                        Read More →
-                      </Button>
+                      </div>
                     </div>
                   </div>
                 </motion.article>
               ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="mt-12 flex justify-center items-center space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(num => {
+                  if (totalPages <= 7) return true;
+                  if (num === 1 || num === totalPages) return true;
+                  if (num >= currentPage - 2 && num <= currentPage + 2) return true;
+                  return false;
+                })
+                .map((number) => (
+                  <Button
+                    key={number}
+                    variant={currentPage === number ? "default" : "outline"}
+                    onClick={() => paginate(number)}
+                  >
+                    {number}
+                  </Button>
+                ))}
+
+              <Button
+                variant="outline"
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
             </div>
           </div>
         </section>

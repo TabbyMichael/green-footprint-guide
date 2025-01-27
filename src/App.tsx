@@ -12,6 +12,7 @@ import CarbonCalculator from "./pages/CarbonCalculator";
 import OffsetPrograms from "./pages/OffsetPrograms";
 import LearnMore from "./pages/LearnMore";
 import AdminDashboard from "./pages/AdminDashboard";
+import { BlogPost } from "@/components/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/carbon-calculator" element={<CarbonCalculator />} />
           <Route path="/offset-programs" element={<OffsetPrograms />} />
           <Route path="/admin/*" element={<AdminDashboard />} />
