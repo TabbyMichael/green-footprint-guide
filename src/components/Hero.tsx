@@ -8,8 +8,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Dialog, DialogContent } from "./ui/dialog";
+import { AuthForms } from "./auth/AuthForms";
 
 export const Hero = () => {
+  const navigate = useNavigate();
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
   const images = [
     {
       src: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9",
@@ -46,10 +52,13 @@ export const Hero = () => {
           transition={{ duration: 0.5 }}
           className="text-center space-y-8"
         >
-          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-8 text-sm font-medium rounded-full border border-primary-300 bg-primary-100 text-primary-700">
+          <Button
+            onClick={() => setShowAuthDialog(true)}
+            className="inline-flex items-center justify-center px-4 py-1.5 mb-8 text-sm font-medium rounded-full border border-primary-300 bg-primary-100 text-primary-700 hover:bg-primary-200 transition-colors"
+          >
             <Leaf className="w-4 h-4 mr-2" />
             Join the sustainability movement
-          </div>
+          </Button>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 max-w-4xl mx-auto">
             Calculate & Reduce Your{" "}
@@ -66,6 +75,7 @@ export const Hero = () => {
             <Button
               size="lg"
               className="bg-primary-500 hover:bg-primary-600 text-white rounded-full px-8"
+              onClick={() => navigate('/carbon-calculator')}
             >
               Start Calculator
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -74,6 +84,7 @@ export const Hero = () => {
               variant="outline"
               size="lg"
               className="rounded-full px-8 border-primary-200 text-primary-700 hover:bg-primary-50"
+              onClick={() => navigate('/learn-more')}
             >
               Learn More
             </Button>
@@ -96,12 +107,18 @@ export const Hero = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-4" />
-              <CarouselNext className="right-4" />
+              <CarouselPrevious />
+              <CarouselNext />
             </Carousel>
           </div>
         </motion.div>
       </div>
+
+      <Dialog open={showAuthDialog} onOpenChange={setShowAuthDialog}>
+        <DialogContent className="sm:max-w-md">
+          <AuthForms />
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

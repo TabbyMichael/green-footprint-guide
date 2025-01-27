@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import CarbonCalculator from "./pages/CarbonCalculator";
 import OffsetPrograms from "./pages/OffsetPrograms";
+import LearnMore from "./pages/LearnMore";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -21,12 +23,14 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/carbon-calculator" element={<CarbonCalculator />} />
           <Route path="/offset-programs" element={<OffsetPrograms />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
