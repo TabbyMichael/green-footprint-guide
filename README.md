@@ -2,7 +2,7 @@
 
 EcoTrack is a comprehensive web application designed to help individuals and organizations track, understand, and reduce their carbon footprint while promoting sustainable living practices.
 
-![EcoTrack Dashboard](placeholder-dashboard.png)
+![EcoTrack Dashboard](public/assets/placeholder-dashboard.png)
 
 ## ✨ Features
 
@@ -12,7 +12,7 @@ Accurately measure your carbon footprint with our detailed calculator that consi
 - Home energy usage
 - Waste management
 
-![Carbon Calculator](placeholder-calculator.png)
+![Carbon Calculator](public/assets/placeholder-calculator.png)
 
 ### 🌱 Offset Programs
 Connect with verified carbon offset programs to neutralize your environmental impact:
@@ -20,7 +20,7 @@ Connect with verified carbon offset programs to neutralize your environmental im
 - Solar panel projects
 - Wind energy support
 
-![Offset Programs](placeholder-programs.png)
+![Offset Programs](public/assets/placeholder-programs.png)
 
 ### 📊 Analytics Dashboard
 Track your progress and impact with detailed analytics:
@@ -76,13 +76,13 @@ npm run dev
 ## 📱 Screenshots
 
 ### Home Page
-![Home Page](placeholder-home.png)
+![Home Page](public/assets/placeholder-home.png)
 
 ### Admin Dashboard
-![Admin Dashboard](placeholder-admin.png)
+![Admin Dashboard](public/assets/placeholder-admin.png)
 
 ### Blog Section
-![Blog](placeholder-blog.png)
+![Blog](public/assets/placeholder-blog.png)
 
 ## 🤝 Contributing
 
